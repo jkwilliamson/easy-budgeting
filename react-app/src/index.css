@@ -1,0 +1,26 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+.content-bg {
+  background-color: #2B3035;
+}
+
+.form-group {
+  background-color: #495057;
+}
+
+.form-control {
+  background-color: #2B3035;
+}
+
+.output-console {
+  background-color: #111;
+  color: #B8B8FF;
+  font-family: monospace;
+}
+
+.chrome-picker input {
+  background-color: #fff;
+}
