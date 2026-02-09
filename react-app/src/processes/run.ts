@@ -46,6 +46,7 @@ function run(accounts: Accounts, transactions: Transactions, range: Range) {
   if (typeof(range.startDate) === 'undefined') {
     return { ledger: undefined, chartData: undefined, message: ('ERROR: There must be a start date for the simulation!') };
   }
+  range.startDate.setHours(0,0,0,0);
 
   if (typeof(range.endDate) === 'undefined' || range.endDate.getTime() === range.startDate.getTime()) {
     range.endDate = addYears(range.startDate, 1);
@@ -73,7 +74,9 @@ function run(accounts: Accounts, transactions: Transactions, range: Range) {
     let currDate = formattedTransactions[id].range.startDate;
     currDate.setHours(0,0,0,0);
     while (currDate.getTime() <= range.endDate.getTime()) {
-      events.push(new TransactionEvent(formattedTransactions[id], currDate));
+      if (currDate.getTime() >= range.startDate.getTime()) {
+        events.push(new TransactionEvent(formattedTransactions[id], currDate));
+      }
       if (typeof(formattedTransactions[id].freq) === 'undefined') {
         break;
       }
@@ -134,7 +137,6 @@ function run(accounts: Accounts, transactions: Transactions, range: Range) {
   }
 
   let currDate = range.startDate;
-  currDate.setHours(0,0,0,0);
   while (currDate.getTime() <= range.endDate.getTime()) {
 
     if (currDate.getDate() === 1 || currDate.getTime() === range.startDate.getTime()) {
